@@ -2,6 +2,8 @@
 //获取应用实例
 const app = getApp()
 
+import utils from '../../utils/util'
+
 Page({
   data: {
     motto: 'Hello World',
@@ -42,6 +44,7 @@ Page({
         }
       })
     }
+    console.log(utils._getMonthArr('2018-04'))
   },
   getUserInfo: function(e) {
     console.log(e)
