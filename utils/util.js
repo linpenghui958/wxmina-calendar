@@ -36,7 +36,7 @@ const _getMonthArr = (date) => {
   let month = arr[1] - 0
   let monthArr = []
 
-  let totalLength = month_days(year)[month]
+  let totalLength = month_days(year)[month - 1]
   let emptyLength = _firstMonth(`${year}-${month}`) 
   emptyLength =  emptyLength > 0 ? emptyLength - 1 : 6
 
@@ -60,6 +60,7 @@ const _getMonthArr = (date) => {
 
 module.exports = {
   formatTime: formatTime,
+  formatNumber,
   _isLeapYear,
   _firstMonth,
   _getMonthArr

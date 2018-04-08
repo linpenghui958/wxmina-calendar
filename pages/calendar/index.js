@@ -9,7 +9,9 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    weeksCh: [ '一', '二', '三', '四', '五', '六', '日' ],
+    monthArr: []
   },
   //事件处理函数
   bindViewTap: function() {
@@ -44,7 +46,7 @@ Page({
         }
       })
     }
-    console.log(utils._getMonthArr('2018-04'))
+    this.initCalendar()
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -52,6 +54,18 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+  },
+  initCalendar() {
+    let date = new Date()
+    let year = date.getFullYear()
+    let month = utils.formatNumber(date.getMonth() + 1)
+    this.getMonthArr()
+  },
+  getMonthArr(date) {
+    const monthArr = utils._getMonthArr('2018-04')
+    this.setData({
+      monthArr: monthArr
     })
   }
 })
