@@ -14,6 +14,20 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const getTodayStr = () => {
+  const date = new Date()
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const str = [year, month, day].map(formatNumber).join('-')
+  const obj = {
+    year,
+    month,
+    str
+  }
+  return obj;
+}
+
 const month_days = (year) => {
       //  1月     2月                 3月  4月 5月 6月 7月 8月 9月 10月11月12月
   return [31, 28 + _isLeapYear(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -30,7 +44,7 @@ const _firstMonth = (yearMonth) => {
 }
 
 // 获取每个月的总天数arr   date = year - month
-const _getMonthArr = (date) => {
+const getMonthArr = (date) => {
   let arr = date.split('-')
   let year = arr[0]
   let month = arr[1] - 0
@@ -61,7 +75,6 @@ const _getMonthArr = (date) => {
 module.exports = {
   formatTime: formatTime,
   formatNumber,
-  _isLeapYear,
-  _firstMonth,
-  _getMonthArr
+  getMonthArr,
+  getTodayStr
 }

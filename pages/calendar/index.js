@@ -2,70 +2,100 @@
 //获取应用实例
 const app = getApp()
 
+const DECEMBER = 12;
+const JANUARY = 1;
+
 import utils from '../../utils/util'
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     weeksCh: [ '一', '二', '三', '四', '五', '六', '日' ],
-    monthArr: []
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+    monthArr: [],
+    selectDay: null,
+    calendarYear: null,
+    calendarMonth: null,
+    calendarTitle: null
   },
   onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-    this.initCalendar()
+    this._initSetDay()
+    this._initCalendar()
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+   _initSetDay() {
+    const { year, month, str} = utils.getTodayStr()
     this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      selectDay: str,
+      calendarYear: year,
+      calendarMonth: month
     })
   },
-  initCalendar() {
-    let date = new Date()
-    let year = date.getFullYear()
-    let month = utils.formatNumber(date.getMonth() + 1)
-    this.getMonthArr()
+  _initCalendar() {
+    const year = this.data.calendarYear
+    const month = this.data.calendarMonth
+    const dateStr = `${year}-${month}`
+    this.getMonthArr(dateStr)
+    this._changeCalendarTitle()
+  },
+  _changeCalendarTitle () {
+    const pickerStr = `${this.data.calendarYear}-${this.data.calendarMonth}`
+    this.setData({
+      calendarTitle: pickerStr
+    })
   },
   getMonthArr(date) {
-    const monthArr = utils._getMonthArr('2018-04')
+    const monthArr = utils.getMonthArr(date)
     this.setData({
       monthArr: monthArr
     })
+  },
+  tapDay(e) {
+    const dayStr = e.currentTarget.dataset.val
+    console.log(`选中的日期为${dayStr}`)
+    this.setData({
+      selectDay: dayStr
+    })
+  },
+  // 前一个月
+  bindLastMonth () {
+    let lastMonth = this.data.calendarMonth - 1
+    let year = this.data.calendarYear
+    if (lastMonth > 0) {
+      this.setData({
+        calendarMonth: lastMonth
+      })
+    } else {
+      this.setData({
+        calendarMonth: DECEMBER,
+        calendarYear: year - 1
+      })
+    }
+    this._initCalendar()
+  },
+  // Next month
+  bindNextMonth () {
+    let nextMonth = this.data.calendarMonth + 1
+    let year = this.data.calendarYear
+    if (nextMonth < 12) {
+      this.setData({
+        calendarMonth: nextMonth
+      })
+    } else {
+      this.setData({
+        calendarMonth: JANUARY,
+        calendarYear: year + 1
+      })
+    }
+    this._initCalendar()
+  },
+
+  bindPickerChange(e) {
+    console.log(e)
+    const pickerStr = e.detail.value
+    const arr = pickerStr.split('-')
+    this.setData({
+      calendarTitle: pickerStr,
+      calendarMonth: arr[1],
+      calendarYear: arr[0]
+    })
+    this._initCalendar()
   }
 })
