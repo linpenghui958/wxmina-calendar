@@ -57,3 +57,33 @@
 .dayChoosed{
 	background-color: blue;
 }
+
+.swiper-calendar{
+  width: 100%;
+  height: 80px;
+  overflow: hidden;
+}
+
+.swiper-date{
+  width: 300%;
+  min-height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
+  position: relative;
+  transition-duration: 300ms;
+}
+.swiper-date.prev{
+  transform: translateX(-50%);
+  transition-duration: 300ms;
+}
+.swiper-date.prev{
+  transform: translateX(50%);
+  transition-duration: 300ms;
+}
+.swiper-date .date-item{
+  display: block;
+  width: 750rpx;
+  float: left;
+}
+
+

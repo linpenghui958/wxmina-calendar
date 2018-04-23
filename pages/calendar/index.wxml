@@ -27,6 +27,28 @@
     </view>
   </view>
 
+  <view class="swiper-calendar">
+    <view class="week">
+      <view wx:for="{{weeksCh}}" wx:key="{{item}}" class="week-item">
+        <text>{{item}}</text>
+      </view>
+    </view>
+    <view class="swiper-date {{state === 'prev' ? 'prev' : state === 'next' ? 'next' : ''}}" bindtouchstart="touchStart" 
+                              bindtouchend="touchend"
+                              bindtouchmove="touchMove"
+                              >
+      <view class="date-item">
+        1
+      </view>
+      <view class="date-item">
+        2
+      </view>
+      <view class="date-item">
+        3
+      </view>
+    </view>
+  </view>
+
 </view>
 
 

@@ -72,9 +72,21 @@ const getMonthArr = (date) => {
   return monthArr
 }
 
+const debounce = (dealy, fn) => {
+  var last = 0;
+  return function () {
+    var curr = +new Date()
+    if (curr - last > delay) {
+      fn.apply(this, arguments)
+      last = curr
+    }
+  }
+}
+
 module.exports = {
-  formatTime: formatTime,
+  formatTime,
   formatNumber,
   getMonthArr,
-  getTodayStr
+  getTodayStr,
+  debounce
 }
