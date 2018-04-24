@@ -33,7 +33,7 @@
         <text>{{item}}</text>
       </view>
     </view>
-    <view class="swiper-date {{state === 'prev' ? 'prev' : state === 'next' ? 'next' : ''}}" bindtouchstart="touchStart" 
+    <!-- <view class="swiper-date {{state === 'prev' ? 'prev' : state === 'next' ? 'next' : ''}}" bindtouchstart="touchStart" 
                               bindtouchend="touchend"
                               bindtouchmove="touchMove"
                               >
@@ -46,7 +46,23 @@
       <view class="date-item">
         3
       </view>
-    </view>
+    </view> -->
+
+    <swiper class="swiper-wrapper" circular="{{circular}}">
+      <swiper-item>
+        <view class="week">
+          <view wx:for="{{weeksCh}}" wx:key="{{item}}" class="week-item">
+            <text>{{item}}</text>
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        2
+      </swiper-item>
+      <swiper-item>
+        3
+      </swiper-item>
+    </swiper>
   </view>
 
 </view>

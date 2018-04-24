@@ -16,7 +16,10 @@ Page({
     calendarMonth: null,
     calendarTitle: null,
     startClientX: 0,
-    state: ''
+    state: '',
+    // swiper配置
+    circular: true,
+    swiperArr: []
   },
   onLoad: function () {
     this._initSetDay()
@@ -48,6 +51,9 @@ Page({
     this.setData({
       monthArr: monthArr
     })
+    swiperArr[0] = monthArr.splice(0, 7)
+    swiperArr[1] = monthArr.splice(0, 7)
+    swiperArr[2] = monthArr.splice(0, 7)
   },
   tapDay(e) {
     const dayStr = e.currentTarget.dataset.val
