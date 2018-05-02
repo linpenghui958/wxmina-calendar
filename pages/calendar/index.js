@@ -107,27 +107,4 @@ Page({
     this._initCalendar()
   },
 
-  // 轮播日历
-  touchStart (e) {
-    console.log('起始位置' + e.touches[0].clientX)
-    this.startClientX = e.touches[0].clientX
-  },
-  touchMove (e) {
-    this.changeClientX = e.touches[0].clientX - this.startClientX
-      console.log('改变的位置' + this.changeClientX)
-    // console.log('改变的位置' + (e.touches[0].clientX - this.startClientX))
-  },
-  touchend (e) {
-    if (this.changeClientX > 50) {
-      console.log('向右')
-      this.setData({
-        state: 'next'
-      })
-    } else if (this.changeClientX < -50) {
-      console.log('向左')
-      this.setData({
-        state: 'prev'
-      })
-    }
-  }
 })
