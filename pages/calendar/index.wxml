@@ -26,8 +26,7 @@
         <text>{{item.num}}</text>
     </view>
   </view>
-
-  <!--
+  
   <view class="swiper-calendar">
     <view class="week">
       <view wx:for="{{weeksCh}}" wx:key="{{item}}" class="week-item">
@@ -52,7 +51,7 @@
       </swiper-item>
     </swiper>
   </view>
-  -->
+
 </view>
 
 
